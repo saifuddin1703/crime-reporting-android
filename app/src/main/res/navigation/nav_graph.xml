@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/signup"
+        android:name="com.example.crimereporting.ui.authentication.Signup"
+        android:label="fragment_signup"
+        tools:layout="@layout/fragment_signup" >
+        <action
+            android:id="@+id/action_signup_to_landingFragment"
+            app:destination="@id/landingFragment"
+            app:enterAnim="@anim/enter_animation"
+            app:exitAnim="@anim/exit_animaiton"
+            app:popEnterAnim="@anim/pop_enter"
+            app:popExitAnim="@anim/pop_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/passwordFragement"
+        android:name="com.example.crimereporting.ui.authentication.NameSetupFragment"
+        android:label="fragment_name_setup"
+        tools:layout="@layout/fragment_name_setup" >
+        <action
+            android:id="@+id/action_passwordFragement_to_signup"
+            app:destination="@id/signup"
+            app:enterAnim="@anim/enter_animation"
+            app:exitAnim="@anim/exit_animaiton"
+            app:popEnterAnim="@anim/pop_enter"
+            app:popExitAnim="@anim/pop_exit" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/landingFragment"
+        android:name="com.example.crimereporting.ui.landing.LandingFragment"
+        android:label="fragment_landing"
+        tools:layout="@layout/landing_fragment">
+
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.crimereporting.ui.authentication.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_passwordFragement"
+            app:destination="@id/passwordFragement"
+            app:enterAnim="@anim/enter_animation"
+            app:exitAnim="@anim/exit_animaiton"
+            app:popEnterAnim="@anim/pop_enter"
+            app:popExitAnim="@anim/pop_exit" />
+        <action
+            android:id="@+id/action_loginFragment_to_landingFragment"
+            app:destination="@id/landingFragment" />
+    </fragment>
+</navigation>

@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Crime Reporting</string>
+    <string name="sign_up_message">Sign up</string>
+    <string name="phone_message">Enter Phone</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="template_signup">to start working</string>
+    <string name="next">next</string>
+    <string name="hint">0</string>
+    <string name="otp_message">Please, enter the 6-digit otp we sent to your numver on SMS</string>
+    <string name="greetings">Hello !</string>
+    <string name="template2">lets introduce</string>
+    <string name="name">name</string>
+    <string name="password_hint">Password</string>
+    <string name="confirm_password_hint">Confirm Password</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="title_activity_new_composable">NewComposable</string>
+    <string name="title_activity_compose_activiy">ComposeActiviy</string>
+    <string name="login">Login</string>
+    <string name="don_t_have_a_account">Don\'t have a account ?</string>
+    <string name="create_account"><u>Create Account</u></string>
+    <string name="app_icon">app icon</string>
+</resources>
