@@ -2,6 +2,7 @@ package com.example.crimereporting.services
 
 import com.example.crimereporting.retrofit.responseBodies.user.GetUserResponse
 import com.google.gson.JsonObject
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -16,6 +17,6 @@ interface UserService {
     @PATCH("api/user/update/me")
     fun updateUser(
         @Header("Authorization") bearer_token: String,
-        @Body updateDetails : JsonObject
+        @Body updateDetails :  JSONObject
     ) : Call<GetUserResponse>
 }

@@ -89,7 +89,7 @@ fun MyProfilePage(
                 contentDescription ="",
                 modifier = Modifier
                     .align(alignment = CenterHorizontally)
-                    .padding(top = 50.dp)
+                    .padding(top = 50.dp,bottom = 15.dp)
                     .size(100.dp)
                     .border(width = 2.dp, color = Color.Black, shape = CircleShape)
                     .clip(CircleShape),
@@ -124,22 +124,21 @@ fun MyProfilePage(
                 })
             Text(text = "edit image",
                 modifier = Modifier
-                    .width(80.dp)
-                    .padding(all = 5.dp)
                     .align(alignment = CenterHorizontally)
                     .background(color = Color.LightGray, shape = RoundedCornerShape(20.dp))
                     .border(color = Color.Black, width = 1.dp, shape = RoundedCornerShape(20.dp))
                     .clickable {
                         launcher.launch("image/*")
-                    },
+                    }
+                    .padding(all = 10.dp)
             )
             InformationBox(field = "Phone Number", value = currentUser.phoneNumber)
 
             InformationBox(field = "Name", value = currentUser.name)
 
-            InformationBox(field = "Aadhar Number", value = currentUser.AadharNumber.toString())
+//            InformationBox(field = "Aadhar Number", value = currentUser.AadharNumber.toString())
 
-            InformationBox(field = "Address", value = currentUser.address.toString())
+            InformationBox(field = "Address", value = if (currentUser.address == null) " Indore" else currentUser.address.toString())
 
 //            Button
         }
@@ -180,12 +179,12 @@ fun InformationBox(field : String,value : String){
                 .padding(start = 15.dp)
                 .align(alignment = CenterStart)
         )
-        Image(painter = painterResource(id = R.drawable.ic_baseline_edit_24),
-            contentDescription = "",
-            modifier = Modifier
-                .padding(end = 10.dp)
-                .size(30.dp)
-                .align(alignment = CenterEnd))
+//        Image(painter = painterResource(id = R.drawable.ic_baseline_edit_24),
+//            contentDescription = "",
+//            modifier = Modifier
+//                .padding(end = 10.dp)
+//                .size(30.dp)
+//                .align(alignment = CenterEnd))
     }
 
 

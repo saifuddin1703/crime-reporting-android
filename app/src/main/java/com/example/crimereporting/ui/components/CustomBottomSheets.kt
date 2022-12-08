@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.crimereporting.models.SOSContact
 import com.example.crimereporting.ui.components.ui.theme.appThemeColor
 
 @Composable
@@ -62,9 +63,152 @@ fun CustomBottomSheet(
             contentColor = Color.White
         ),
             shape = CircleShape,
-        modifier = Modifier.padding(top = 40.dp, bottom = 10.dp)
+        modifier = Modifier
+            .padding(top = 40.dp, bottom = 10.dp)
             .align(alignment = CenterHorizontally)) {
             Text(text = "Send")
+        }
+    }
+}
+
+@Composable
+fun AddSoSBottomSheet(
+    add : (SOSContact)-> Unit
+){
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .background(color = Color.White)
+    ) {
+        var contactName by remember {
+            mutableStateOf("")
+        }
+
+        var contactNumber by remember {
+            mutableStateOf("")
+        }
+        Text(text = "Add a contact",
+            modifier = Modifier
+                .padding(top = 10.dp)
+                .align(alignment = CenterHorizontally),
+            color = appThemeColor,
+            fontWeight = MaterialTheme.typography.headlineMedium.fontWeight,
+            fontSize = MaterialTheme.typography.headlineMedium.fontSize)
+
+        OutlinedTextField(
+            value = contactName,
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = appThemeColor
+            ),
+            label = {
+                    Text(text = "Name")
+            },
+            shape = RoundedCornerShape(20.dp),
+            modifier = Modifier
+                .padding(top = 20.dp)
+                .align(alignment = CenterHorizontally),
+            onValueChange = {
+                contactName = it
+            })
+
+        OutlinedTextField(
+            value = contactNumber,
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = appThemeColor
+            ),
+            label = {
+                    Text(text = "Number")
+            },
+            shape = RoundedCornerShape(20.dp),
+            modifier = Modifier
+                .padding(top = 10.dp)
+                .align(alignment = CenterHorizontally),
+            onValueChange = {
+                contactNumber = it
+            })
+
+        Button(onClick = {
+                         add(SOSContact(name = contactName, contact = contactNumber.toLong()))
+                         },
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = appThemeColor,
+                contentColor = Color.White
+            ),
+            shape = CircleShape,
+            modifier = Modifier
+                .padding(top = 40.dp, bottom = 10.dp)
+                .align(alignment = CenterHorizontally)) {
+            Text(text = "Add")
+        }
+    }
+}
+
+@Composable
+fun EditContactBottomSheet(
+    edit : ()-> Unit
+){
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .background(color = Color.White)
+    ) {
+        var contactName by remember {
+            mutableStateOf("")
+        }
+
+        var contactNumber by remember {
+            mutableStateOf("")
+        }
+        Text(text = "Edit contact",
+            modifier = Modifier
+                .padding(top = 10.dp)
+                .align(alignment = CenterHorizontally),
+            color = appThemeColor,
+            fontWeight = MaterialTheme.typography.headlineMedium.fontWeight,
+            fontSize = MaterialTheme.typography.headlineMedium.fontSize)
+
+        OutlinedTextField(
+            value = contactName,
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = appThemeColor
+            ),
+            label = {
+                Text(text = "Name")
+            },
+            shape = RoundedCornerShape(20.dp),
+            modifier = Modifier
+                .padding(top = 20.dp)
+                .align(alignment = CenterHorizontally),
+            onValueChange = {
+                contactName = it
+            })
+
+        OutlinedTextField(
+            value = contactNumber,
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = appThemeColor
+            ),
+            label = {
+                Text(text = "Number")
+            },
+            shape = RoundedCornerShape(20.dp),
+            modifier = Modifier
+                .padding(top = 10.dp)
+                .align(alignment = CenterHorizontally),
+            onValueChange = {
+                contactNumber = it
+            })
+
+        Button(onClick = edit,
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = appThemeColor,
+                contentColor = Color.White
+            ),
+            shape = CircleShape,
+            modifier = Modifier
+                .padding(top = 40.dp, bottom = 10.dp)
+                .align(alignment = CenterHorizontally)) {
+            Text(text = "Edit")
         }
     }
 }
@@ -76,3 +220,22 @@ fun CustomPreview(){
 
     }
 }
+
+
+@Composable
+@Preview
+fun CustomAddPreview(){
+    AddSoSBottomSheet{
+
+    }
+}
+
+
+@Composable
+@Preview
+fun CustomEditPreview(){
+    EditContactBottomSheet{
+
+    }
+}
+

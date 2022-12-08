@@ -7,6 +7,7 @@ import android.location.Location
 import android.net.SocketKeepalive
 import android.os.Looper
 import com.example.crimereporting.MainActivity
+import com.example.crimereporting.models.SOSContact
 import com.example.crimereporting.models.user
 import com.example.crimereporting.retrofit.requestBodies.authentication.LoginVerifyOTPRequestBody
 import com.example.crimereporting.retrofit.requestBodies.authentication.SendOTPRequestBody
@@ -25,6 +26,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import dagger.hilt.android.qualifiers.ApplicationContext
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -113,8 +115,8 @@ class UserRepository @Inject constructor(
         onSuccess : (updatedUser : user) -> Unit,
         onFailure : (message : String) -> Unit
     ){
-        val jsonObject = JsonObject()
-        jsonObject.addProperty("profileImage",imageURl)
+        val jsonObject = JSONObject()
+        jsonObject.put("profileImage",imageURl)
         userService.updateUser(
             bearer_token = "Bearer ${getTokenFromSharedPreferences()}",
             updateDetails = jsonObject
@@ -142,4 +144,33 @@ class UserRepository @Inject constructor(
         )
     }
 //    fun put
+    fun updateSosContactList(
+        sosContacts : List<SOSContact>,
+        onSuccess : (updatedUser : user) -> Unit,
+        onFailure : (message : String) -> Unit
+    )
+    {
+        val updateBody = JSONObject()
+        updateBody.put("sosContacts",sosContacts)
+
+        val token = getTokenFromSharedPreferences()
+
+        userService.updateUser(bearer_token = "Bearer $token", updateDetails = updateBody)
+            .enqueue(object : Callback<GetUserResponse>{
+                override fun onResponse(
+                    call: Call<GetUserResponse>,
+                    response: Response<GetUserResponse>
+                ) {
+                    if (response.isSuccessful){
+                        onSuccess(response.body()?.data!!)
+                    }
+                }
+
+                override fun onFailure(call: Call<GetUserResponse>, t: Throwable) {
+                    onFailure(t.message.toString())
+                }
+
+            })
+
+    }
 }

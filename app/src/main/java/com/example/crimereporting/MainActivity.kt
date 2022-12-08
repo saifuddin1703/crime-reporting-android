@@ -99,11 +99,15 @@ class MainActivity : AppCompatActivity() {
                     call: Call<String>,
                     response: Response<String>
                 ) {
+                    if (response.isSuccessful)
                     Log.d("tag",response.body().toString())
+                    else
+                        Log.d("tag",response.message())
+
                 }
 
                 override fun onFailure(call: Call<String>, t: Throwable) {
-                    Log.d("tag",t.toString())
+                    Log.d("tag",t.message.toString())
                 }
 
             })

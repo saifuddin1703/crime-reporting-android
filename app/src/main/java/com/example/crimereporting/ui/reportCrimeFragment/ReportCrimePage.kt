@@ -8,10 +8,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -22,6 +19,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Alignment.Companion.CenterVertically
+import androidx.compose.ui.Alignment.Companion.TopCenter
 import androidx.compose.ui.Alignment.Companion.TopEnd
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,6 +34,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.crimereporting.R
 import com.example.crimereporting.models.coordinates
 import com.example.crimereporting.models.crime
+import com.example.crimereporting.ui.components.CustomMapSearchBar
 import com.example.crimereporting.ui.components.FailedScreen
 import com.example.crimereporting.ui.components.LoadingScreen
 import com.example.crimereporting.ui.components.MyMap
@@ -134,6 +133,7 @@ fun ReportCrimePage(
 
     }else {
         Scaffold(modifier = Modifier
+//            .verticalScroll(enabled = true, state = ScrollState(0))
             .fillMaxSize(),
             topBar = {
                 TopAppBar(
@@ -443,12 +443,22 @@ fun SetLocationContainer(enabled : Boolean,onClick : (LatLng)->Unit){
 
 @Composable
 fun SetLocation(onClick: (LatLng) -> Unit) {
-    MyMap(modifier = Modifier.fillMaxSize(), onMapReady = {map->
-        map.setOnMapClickListener {
-            map.addMarker(MarkerOptions().position(it).title("Your Selected Location"))
-            onClick(it)
-        }
-    })
+    Box(modifier = Modifier.fillMaxSize()) {
+        MyMap(modifier = Modifier.fillMaxSize(), onMapReady = { map ->
+            map.setOnMapClickListener {
+                map.addMarker(MarkerOptions().position(it).title("Your Selected Location"))
+                onClick(it)
+            }
+        })
+//        var searchQuery by remember {
+//            mutableStateOf("")
+//        }
+//
+//        CustomMapSearchBar(searchQuery = searchQuery, modifier = Modifier
+//            .align(alignment = TopCenter)
+//            .fillMaxWidth(0.9f))
+//
+    }
 }
 
 
